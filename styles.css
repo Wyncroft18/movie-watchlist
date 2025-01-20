@@ -100,10 +100,9 @@ section .no-movies-icon {
     height: 250px;
     overflow: hidden;
     border-bottom: 2px solid #6b7280;
-    padding-bottom: 2rem;
+    padding: 2rem 0;
 }
 
-/* create style for movie card section */
 .movie-card .movie-description {
     display: flex;
     flex-direction: column;
@@ -112,7 +111,35 @@ section .no-movies-icon {
     text-align: justify;
 }
 
-.movie-description p {
+.movie-description h2 {
+    display: inline-block;
+}
+
+.runtime {
+    color: #0e0e0e;
+}
+
+.runtime span {
+    margin-right: 1rem;
+}
+
+.add-to-watchlist {
+    position: relative;
+    margin-left: 2rem;
+}
+
+.add-to-watchlist img {
+    width: 1.13rem;
+    position: absolute;
+    left: -1.5rem;
+    top: 0;
+}
+
+.add-to-watchlist p {
+    display: inline-block;
+}
+
+.movie-description > p {
     color: #6b7280;
     line-height: 1.5rem;
 }

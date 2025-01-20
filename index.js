@@ -1,8 +1,17 @@
 const inputBox = document.getElementById("input-box");
 const searchBtn = document.getElementById("search-btn");
 const movieSection = document.getElementById("movie-section");
+const noMovies = document.getElementById("no-movies-icon");
+
+let myList = [];
 
 searchBtn.addEventListener("click", async () => {
+    if (inputBox.value === "") {
+        noMovies.innerHTML = `
+            <h3>Unable to find what you're looking for. Please try another search.</h3>
+        `;
+    }
+
     let response = await fetch(
         `http://www.omdbapi.com/?apikey=26514f44&s=${inputBox.value}`
     );
@@ -14,7 +23,6 @@ searchBtn.addEventListener("click", async () => {
         movieTitles.push(movie.Title);
     });
 
-    // how would i fetch data for each movie???
     let moviesData = [];
 
     for (let movie of movieTitles) {
@@ -28,28 +36,40 @@ searchBtn.addEventListener("click", async () => {
     movieSection.innerHTML = getMovieHtml(moviesData);
 });
 
+document.addEventListener("click", (e) => {
+    const movieId = e.target.dataset.movieId;
+
+    if (movieId) {
+        myList.push(movieId);
+    }
+});
+
 function getMovieHtml(moviesData) {
-    let movieHtml = ""
+    let movieHtml = "";
 
     moviesData.forEach((movie) => {
-        const {Poster, Title, Runtime, Plot} = movie
+        const { imdbID, Poster, Title, Runtime, Plot, Genre } = movie;
 
         movieHtml += `
-            <div class="movie-card">
+            <div class="movie-card" id="${imdbID}">
                 <img src="${Poster}" >
                 <div class="movie-description">
                     <div>
                         <h2>${Title}</h2>
-                        <span>
-                            
+                    </div>
+                    <div class="runtime">
+                        <span>${Runtime}</span>
+                        <span>${Genre}</span>
+                        <span class="add-to-watchlist">
+                            <img src="./img/add-icon.png" data-movie-id="${imdbID}" >
+                            <p data-movie-id="${imdbID}" >Watchlist</p>
                         </span>
                     </div>
-                    <div>${Runtime}</div>
                     <p>${Plot}</p>
                 </div>
             </div>
-        `
-    })
+        `;
+    });
 
-    return movieHtml
+    return movieHtml;
 }
