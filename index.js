@@ -34,6 +34,7 @@ searchBtn.addEventListener("click", async () => {
     }
 
     movieSection.innerHTML = getMovieHtml(moviesData);
+    inputBox.value = "";
 });
 
 document.addEventListener("click", (e) => {
