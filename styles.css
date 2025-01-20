@@ -74,7 +74,7 @@ header {
 
 main {
     flex-grow: 1;
-    margin: 5rem auto;
+    margin: 5rem auto 3rem;
     position: relative;
 }
 
@@ -101,6 +101,10 @@ section .no-movies-icon {
     overflow: hidden;
     border-bottom: 2px solid #6b7280;
     padding: 2rem 0;
+}
+
+.movie-card:last-child {
+    border: none;
 }
 
 .movie-card .movie-description {
