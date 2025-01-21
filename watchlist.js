@@ -77,7 +77,7 @@ async function getMovieData(movieId) {
 
     for (let id of movieId) {
         let response = await fetch(
-            `http://www.omdbapi.com/?apikey=26514f44&i=${id}&plot=short`
+            `https://www.omdbapi.com/?apikey=26514f44&i=${id}&plot=short`
         );
         let data = await response.json();
         moviesData.push(data);

@@ -15,7 +15,7 @@ searchBtn.addEventListener("click", async () => {
     }
 
     let response = await fetch(
-        `http://www.omdbapi.com/?apikey=26514f44&s=${inputBox.value}`
+        `https://www.omdbapi.com/?apikey=26514f44&s=${inputBox.value}`
     );
     let data = await response.json();
 
@@ -29,7 +29,7 @@ searchBtn.addEventListener("click", async () => {
 
     for (let movie of movieTitles) {
         let response = await fetch(
-            `http://www.omdbapi.com/?apikey=26514f44&t=${movie}&plot=short`
+            `https://www.omdbapi.com/?apikey=26514f44&t=${movie}&plot=short`
         );
         let data = await response.json();
         moviesData.push(data);
