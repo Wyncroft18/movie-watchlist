@@ -3,7 +3,9 @@ const searchBtn = document.getElementById("search-btn");
 const movieSection = document.getElementById("movie-section");
 const noMovies = document.getElementById("no-movies-icon");
 
-let myList = [];
+let myList = JSON.parse(localStorage.getItem("movieList"))
+    ? JSON.parse(localStorage.getItem("movieList"))
+    : [];
 
 searchBtn.addEventListener("click", async () => {
     if (inputBox.value === "") {
@@ -42,6 +44,7 @@ document.addEventListener("click", (e) => {
 
     if (movieId) {
         myList.push(movieId);
+        localStorage.setItem("movieList", JSON.stringify(myList));
     }
 });
 

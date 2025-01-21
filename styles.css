@@ -135,6 +135,7 @@ section .no-movies-icon {
 .add-to-watchlist {
     position: relative;
     margin-left: 2rem;
+    cursor: pointer;
 }
 
 .add-to-watchlist img {

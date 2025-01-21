@@ -70,3 +70,57 @@ section .no-movies {
     color: black;
     font-size: 1rem;
 }
+
+.movie-card {
+    display: flex;
+    height: 250px;
+    overflow: hidden;
+    border-bottom: 2px solid #6b7280;
+    padding: 2rem 0;
+}
+
+.movie-card:last-child {
+    border: none;
+}
+
+.movie-card .movie-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0 1rem;
+    text-align: justify;
+}
+
+.movie-description h2 {
+    display: inline-block;
+}
+
+.runtime {
+    color: #0e0e0e;
+}
+
+.runtime span {
+    margin-right: 1rem;
+}
+
+.add-to-watchlist {
+    position: relative;
+    margin-left: 2rem;
+    cursor: pointer;
+}
+
+.add-to-watchlist img {
+    width: 1.13rem;
+    position: absolute;
+    left: -1.5rem;
+    top: 0;
+}
+
+.add-to-watchlist p {
+    display: inline-block;
+}
+
+.movie-description > p {
+    color: #6b7280;
+    line-height: 1.5rem;
+}
