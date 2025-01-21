@@ -26,6 +26,11 @@ header {
     padding: 0 5rem;
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
+
 main {
     flex-grow: 1;
     margin: 5rem auto 3rem;
@@ -49,18 +54,18 @@ section .no-movies {
     transform: translate(-50%, -50%);
 }
 
-.no-movies > span {
+.no-movies > a {
     position: relative;
     margin-top: 1rem;
 }
 
-.no-movies > span > img {
+.no-movies > a > img {
     width: 1.13rem;
     position: relative;
     top: 3px;
 }
 
-.no-movies > span > p {
+.no-movies > a > p {
     display: inline-block;
     color: black;
     font-size: 1rem;
