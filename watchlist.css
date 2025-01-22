@@ -31,6 +31,19 @@ a {
     color: white;
 }
 
+a::after {
+    content: "";
+    position: absolute;
+    background-color: white;
+    height: 2px;
+    width: 0;
+    transition: all 0.3s ease;
+}
+
+a:hover::after {
+    width: 8%;
+}
+
 main {
     flex-grow: 1;
     margin: 5rem auto 3rem;
@@ -105,15 +118,24 @@ section .no-movies {
 
 .add-to-watchlist {
     position: relative;
-    margin-left: 2rem;
     cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    transition: background-color 0.15s;
+}
+
+.add-to-watchlist:hover {
+    background-color: #6b7280;
+}
+
+.add-to-watchlist:active {
+    opacity: 0.8;
 }
 
 .add-to-watchlist img {
     width: 1.13rem;
-    position: absolute;
-    left: -1.5rem;
-    top: 0;
+    position: relative;
+    top: 3px;
 }
 
 .add-to-watchlist p {
