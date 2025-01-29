@@ -7,35 +7,41 @@ let myList = JSON.parse(localStorage.getItem("movieList"))
     ? JSON.parse(localStorage.getItem("movieList"))
     : [];
 
-searchBtn.addEventListener("click", async () => {
-    if (inputBox.value === "") {
+searchBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    try {
+        let response = await fetch(
+            `https://www.omdbapi.com/?apikey=26514f44&s=${inputBox.value}`
+        );
+
+        let data = await response.json();
+
+        if (!data.Search) {
+            noMovies.innerHTML = `
+                <h3>Unable to find what you're looking for. Please try another search.</h3>
+            `;
+            return;
+        }
+
+        const moviesDataPromises = data.Search.map((movie) => {
+            return fetch(
+                `https://www.omdbapi.com/?apikey=26514f44&t=${movie.Title}&plot=short`
+            ).then((res) => res.json());
+        });
+
+        const moviesData = await Promise.all(moviesDataPromises);
+
+        console.log(moviesData);
+
+        movieSection.innerHTML = getMovieHtml(moviesData);
+    } catch (error) {
+        console.error("Error fetching movie data:", error);
         noMovies.innerHTML = `
-            <h3>Unable to find what you're looking for. Please try another search.</h3>
+            <h3>Something went wrong. Please try again later.</h3>
         `;
     }
 
-    let response = await fetch(
-        `https://www.omdbapi.com/?apikey=26514f44&s=${inputBox.value}`
-    );
-    let data = await response.json();
-
-    const movieTitles = [];
-
-    data.Search.forEach((movie) => {
-        movieTitles.push(movie.Title);
-    });
-
-    let moviesData = [];
-
-    for (let movie of movieTitles) {
-        let response = await fetch(
-            `https://www.omdbapi.com/?apikey=26514f44&t=${movie}&plot=short`
-        );
-        let data = await response.json();
-        moviesData.push(data);
-    }
-
-    movieSection.innerHTML = getMovieHtml(moviesData);
     inputBox.value = "";
 });
 
@@ -52,11 +58,23 @@ function getMovieHtml(moviesData) {
     let movieHtml = "";
 
     moviesData.forEach((movie) => {
+        if (
+            !movie ||
+            !movie.imdbID ||
+            !movie.Poster ||
+            !movie.Title ||
+            !movie.Runtime ||
+            !movie.Plot ||
+            !movie.Genre
+        ) {
+            return;
+        }
+
         const { imdbID, Poster, Title, Runtime, Plot, Genre } = movie;
 
         movieHtml += `
             <div class="movie-card" id="${imdbID}">
-                <img src="${Poster}" >
+                <img src="${Poster}" alt="${Title}">
                 <div class="movie-description">
                     <div>
                         <h2>${Title}</h2>
